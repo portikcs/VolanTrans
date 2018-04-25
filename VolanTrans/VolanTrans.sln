@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolanTrans.TestConsoleApp", "VolanTrans.TestConsoleApp\VolanTrans.TestConsoleApp.csproj", "{AFE99F4A-DB7F-4478-A768-7BB9FE81436B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolanTrans.UI", "VolanTrans.UI\VolanTrans.UI.csproj", "{89041875-60A7-44B8-B069-765026654128}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AFE99F4A-DB7F-4478-A768-7BB9FE81436B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFE99F4A-DB7F-4478-A768-7BB9FE81436B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFE99F4A-DB7F-4478-A768-7BB9FE81436B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89041875-60A7-44B8-B069-765026654128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89041875-60A7-44B8-B069-765026654128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89041875-60A7-44B8-B069-765026654128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89041875-60A7-44B8-B069-765026654128}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
