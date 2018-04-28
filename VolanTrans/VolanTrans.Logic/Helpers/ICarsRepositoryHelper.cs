@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VolanTrans.Logic.Model;
 
 namespace VolanTrans.Logic.Helpers
@@ -9,7 +10,7 @@ namespace VolanTrans.Logic.Helpers
         bool UpdateCar(CarModel model);
         bool DeleteCar(CarModel model);
 
-        bool DeleteCar(int id);
+        bool DeleteCar(Guid id);
 
         List<CarModel> GetCars();
     }

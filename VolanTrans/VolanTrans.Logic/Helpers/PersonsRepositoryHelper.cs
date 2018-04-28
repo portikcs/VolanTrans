@@ -7,10 +7,11 @@ using VolanTrans.Logic.Model;
 
 namespace VolanTrans.Logic.Helpers
 {
-    public class CarsRepositoryHelper : ICarsRepositoryHelper
+    public class PersonsRepositoryHelper : IPersonsRepositoryHelper
     {
-        private string _path = ConfigurationManager.AppSettings["WorkFolder"] + @"\Cars\";
-        public bool AddCar(CarModel model)
+
+        private string _path = ConfigurationManager.AppSettings["WorkFolder"] + @"\Persons\";
+        public bool AddPerson(PersonModel model)
         {
             try
             {
@@ -31,11 +32,11 @@ namespace VolanTrans.Logic.Helpers
             }
         }
 
-        public bool UpdateCar(CarModel model)
+        public bool UpdatePerson(PersonModel model)
         {
             try
             {
-                return DeleteCar(model) && AddCar(model);
+                return DeletePerson(model) && AddPerson(model);
             }
             catch
             {
@@ -43,7 +44,7 @@ namespace VolanTrans.Logic.Helpers
             }
         }
 
-        public bool DeleteCar(CarModel model)
+        public bool DeletePerson(PersonModel model)
         {
             try
             {
@@ -56,7 +57,7 @@ namespace VolanTrans.Logic.Helpers
             }
         }
 
-        public bool DeleteCar(Guid id)
+        public bool DeletePerson(Guid id)
         {
             try
             {
@@ -69,10 +70,10 @@ namespace VolanTrans.Logic.Helpers
             }
         }
 
-        public List<CarModel> GetCars()
+        public List<PersonModel> GetPersons()
         {
 
-            List<CarModel> result = new List<CarModel>();
+            List<PersonModel> result = new List<PersonModel>();
 
             if (!Directory.Exists(_path)) Directory.CreateDirectory(_path);
 
@@ -80,17 +81,14 @@ namespace VolanTrans.Logic.Helpers
             {
 
                 string item = File.ReadAllText(file);
-                var car = JsonConvert.DeserializeObject<CarModel>(item);
-                result.Add(car);
+                var person = JsonConvert.DeserializeObject<PersonModel>(item);
+                result.Add(person);
 
             }
 
             return result;
 
         }
-
-
-
-
+         
     }
 }

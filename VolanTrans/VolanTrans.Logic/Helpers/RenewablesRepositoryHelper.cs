@@ -7,16 +7,18 @@ using VolanTrans.Logic.Model;
 
 namespace VolanTrans.Logic.Helpers
 {
-    public class CarsRepositoryHelper : ICarsRepositoryHelper
+    public class RenewablesRepositoryHelper : IRenewablesRepositoryHelper
     {
-        private string _path = ConfigurationManager.AppSettings["WorkFolder"] + @"\Cars\";
-        public bool AddCar(CarModel model)
+
+        private string _path = ConfigurationManager.AppSettings["WorkFolder"]+@"\Renewables\";
+
+        public bool AddRenewModel(RenewableModel model)
         {
             try
             {
                 if (!Directory.Exists(_path)) Directory.CreateDirectory(_path);
 
-                using(StreamWriter sw = new StreamWriter(_path + model.Id + ".json"))
+                using(StreamWriter sw = new StreamWriter(_path+model.Id+".json"))
                 {
                     string sm = JsonConvert.SerializeObject(model);
                     sw.Write(sm);
@@ -25,17 +27,17 @@ namespace VolanTrans.Logic.Helpers
                 }
                 return true;
             }
-            catch
+            catch 
             {
                 return false;
             }
         }
 
-        public bool UpdateCar(CarModel model)
+        public bool UpdateRenewModel(RenewableModel model)
         {
             try
             {
-                return DeleteCar(model) && AddCar(model);
+                return DeleteRenewModel(model) && AddRenewModel(model);
             }
             catch
             {
@@ -43,7 +45,7 @@ namespace VolanTrans.Logic.Helpers
             }
         }
 
-        public bool DeleteCar(CarModel model)
+        public bool DeleteRenewModel(RenewableModel model)
         {
             try
             {
@@ -56,7 +58,7 @@ namespace VolanTrans.Logic.Helpers
             }
         }
 
-        public bool DeleteCar(Guid id)
+        public bool DeleteRenewModel(Guid id)
         {
             try
             {
@@ -69,10 +71,9 @@ namespace VolanTrans.Logic.Helpers
             }
         }
 
-        public List<CarModel> GetCars()
+        public List<RenewableModel> GetRenewables()
         {
-
-            List<CarModel> result = new List<CarModel>();
+           List<RenewableModel> result = new List<RenewableModel>();
 
             if (!Directory.Exists(_path)) Directory.CreateDirectory(_path);
 
@@ -80,17 +81,14 @@ namespace VolanTrans.Logic.Helpers
             {
 
                 string item = File.ReadAllText(file);
-                var car = JsonConvert.DeserializeObject<CarModel>(item);
-                result.Add(car);
+                var renew = JsonConvert.DeserializeObject<RenewableModel>(item);
+                result.Add(renew);
 
             }
 
-            return result;
-
+           return result;
+           
         }
-
-
-
-
+         
     }
 }
