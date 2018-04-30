@@ -18,12 +18,24 @@ namespace VolanTrans.UI
     {
 
         private Cars _cars;
-        private CarsRepositoryHelper _carsRepositoryHelper;
-        private bool _loaded;
-        private int _selectedId = 0;
+        private Persons _persons;
+        private Renewables _renewables;
+        private readonly CarsRepositoryHelper _carsRepositoryHelper;
+        private readonly PersonsRepositoryHelper _personsRepositoryHelper;
+        private readonly RenewablesRepositoryHelper _renewablesRepositoryHelper;
+        private Guid _selectedRenew;
+        private Guid _selectedCar;
+        private Guid _selectedPerson;
+
         public MainForm()
         {
             InitializeComponent();
+            _carsRepositoryHelper = new CarsRepositoryHelper();
+            _personsRepositoryHelper = new PersonsRepositoryHelper();
+            _renewablesRepositoryHelper = new RenewablesRepositoryHelper();
+            _renewables = new Renewables();
+            _cars = new Cars();
+            _persons = new Persons();
 
         }
 
@@ -32,10 +44,7 @@ namespace VolanTrans.UI
 
             try
             {
-                LoadDataFirst();
-                _loaded = true;
-                radioButtonProp.Checked = true;
-
+                LoadData();
             }
             catch (Exception ex)
             {
@@ -44,159 +53,365 @@ namespace VolanTrans.UI
 
         }
 
-        private void dataGridViewMain_SelectionChanged(object sender, EventArgs e)
+
+
+        private void LoadData()
         {
-            if (dataGridViewMain.SelectedCells.Count > 0 && _loaded)
-            {
-                int selectedrowindex = dataGridViewMain.SelectedCells[0].RowIndex;
+            var renewList = _renewablesRepositoryHelper.GetRenewables();
+            foreach (var itemRenew in renewList) _renewables.InitAdd(itemRenew);
+            LoadRenew(_renewables.GetList().FirstOrDefault()?.Id ?? Guid.Empty);
+            LoadRenewablesDataGrid(_renewables.GetList());
 
-                DataGridViewRow selectedRow = dataGridViewMain.Rows[selectedrowindex];
+            var cars = _carsRepositoryHelper.GetCars();
+            foreach (var itemCar in cars) _cars.InitAdd(itemCar);
+            LoadCar(_cars.GetList().FirstOrDefault()?.Id ?? Guid.Empty);
+            LoadCarDataGrid(_cars.GetList());
 
-                var id = Convert.ToString(selectedRow.Cells["ID"].Value);
-                int carId = 0;
-                int.TryParse(id, out carId);
-                if (_cars.GetList().Any(w => w.Id == carId)) LoadCarData(carId);
+            var persons = _personsRepositoryHelper.GetPersons();
+            foreach (var itemPerson in persons) _persons.InitAdd(itemPerson);
+            LoadPerson(_persons.GetList().FirstOrDefault()?.Id ?? Guid.Empty);
+            LoadPersonDataGrid(_persons.GetList());
 
-            }
+        }
+
+        private void LoadPerson(Guid id)
+        {
+            var person = _persons.GetList().FirstOrDefault(w => w.Id.Equals(id));
+            if (person == null) return;
+            textPersonName.Text = person.FullName;
+            textPersonEmail.Text = person.Email;
+            textPersonPhone.Text = person.Phone;
         }
 
 
-        private void LoadCarData(int id)
+        private void SavePerson()
         {
-            var car = _cars.GetList().FirstOrDefault(w => w.Id == id);
+            var person = new PersonModel();
+            person.Id = _selectedPerson != Guid.Empty ? _selectedPerson : Guid.NewGuid();
+            person.FullName = textPersonName.Text;
+            person.Email = textPersonEmail.Text;
+            person.Phone = textPersonPhone.Text;
+
+            if (string.IsNullOrWhiteSpace(person.FullName))
+            {
+                MessageBox.Show("Name is empty!", "Error");
+                return;
+            }
+            _persons.Add(person);
+            LoadPersonDataGrid(_persons.GetList());
+        }
+
+
+        private void LoadCar(Guid id)
+        {
+            var car = _cars.GetList().FirstOrDefault(w => w.Id.Equals(id));
             if (car == null) return;
-            textBoxProp.Text = car.Proprietar;
-            textBoxMarca.Text = car.Marca;
-            textBoxModel.Text = car.Model;
-            textBoxTip.Text = car.Tip;
-            textBoxNrImat.Text = car.NrdeImatriculare;
-            textBoxNrsasiu.Text = car.NumarSasiu;
-            dateTimePickerITP.Value = car.ITP;
-            dateTimePickerRCA.Value = car.RCA;
-            dateTimePickerAsgPers.Value = car.AsigPers;
-            _selectedId = id;
+            textCarLp.Text = car.LicencePlate;
+            textCarMM.Text = car.ModelAndMake;
+            textCarYear.Text = car.Year.ToString();
 
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void SaveCar()
         {
-            var model = new CarModel();
-            model.Proprietar = textBoxProp.Text;
-            model.Marca = textBoxMarca.Text;
-            model.Model = textBoxModel.Text;
-            model.Tip = textBoxTip.Text;
-            model.NrdeImatriculare = textBoxNrImat.Text;
-            model.NumarSasiu = textBoxNrsasiu.Text;
-            model.ITP = dateTimePickerITP.Value;
-            model.RCA = dateTimePickerRCA.Value;
-            model.AsigPers = dateTimePickerAsgPers.Value;
-            model.Id = _selectedId;
-            _cars.Add(model);
-            LoadData();
+            var car = new CarModel();
+            car.Id = _selectedCar != Guid.Empty ? _selectedCar : Guid.NewGuid();
+            car.LicencePlate = textCarLp.Text;
+            car.ModelAndMake = textCarMM.Text;
+            car.Year = textCarYear.Text;
+
+            if (string.IsNullOrWhiteSpace(car.LicencePlate))
+            {
+                MessageBox.Show("Licence Plate is empty!", "Error");
+                return;
+            }
+            _cars.Add(car);
+            LoadCarDataGrid(_cars.GetList());
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void LoadCarDataGrid(List<CarModel> data)
         {
-            _cars.Remove(_selectedId);
-            LoadData();
+            if (data == null || !data.Any()) return;
+            dataGridViewCar.Rows.Clear();
+            foreach (var item in data)
+            {
+                dataGridViewCar.Rows.Add(item.Id, item.LicencePlate, item.ModelAndMake, item.Year);
+                textRenewAppliesTo.AutoCompleteCustomSource.Add(item.LicencePlate);
+            }
+
+            _selectedCar = data.FirstOrDefault()?.Id ?? Guid.Empty;
         }
 
-        private void LoadDataFirst()
-        {
-            dataGridViewMain.Rows.Clear();
-            dataGridViewProblem.Rows.Clear();
 
-            if (_carsRepositoryHelper == null) _carsRepositoryHelper = new CarsRepositoryHelper();
-            List<CarModel> carList = _carsRepositoryHelper.GetCars();
-            _cars = new Cars();
+        private void LoadPersonDataGrid(List<PersonModel> data)
+        {
+            if (data == null || !data.Any()) return;
+            dataGridViewPerson.Rows.Clear();
+            foreach (var item in data)
+            {
+                dataGridViewPerson.Rows.Add(item.Id, item.FullName, item.Email, item.Phone);
+                textRenewAppliesTo.AutoCompleteCustomSource.Add(item.FullName);
+            }
+
+            _selectedPerson = data.FirstOrDefault()?.Id ?? Guid.Empty;
+        }
+
+
+        private void LoadRenew(Guid id)
+        {
+            var renew = _renewables.GetList().FirstOrDefault(w => w.Id.Equals(id));
+            if (renew == null) return;
+            textRenewName.Text = renew.Name;
+            textRenewAppliesTo.Text = renew.AppliesTo;
+            dateTimePickerExp.Value = renew.ExpiryDate;
+            richTextBoxRemarks.Text = renew.Remarks;
+        }
+
+        private void SaveRenew()
+        {
+            var renew = new RenewableModel();
+            renew.Id = _selectedRenew != Guid.Empty ? _selectedRenew : Guid.NewGuid();
+            renew.Name = textRenewName.Text;
+            renew.AppliesTo = textRenewAppliesTo.Text;
+            renew.ExpiryDate = dateTimePickerExp.Value;
+            renew.Remarks = richTextBoxRemarks.Text;
+
+            if (string.IsNullOrWhiteSpace(renew.Name) || string.IsNullOrWhiteSpace(renew.AppliesTo) ||
+               !textRenewAppliesTo.AutoCompleteCustomSource.Contains(renew.AppliesTo.Trim()))
+            {
+                MessageBox.Show("Something is wrong!", "Error");
+                return;
+            }
+            _renewables.Add(renew);
+            LoadRenewablesDataGrid(_renewables.GetList());
+        }
+
+        private void LoadRenewablesDataGrid(List<RenewableModel> data)
+        {
+            if (data == null || !data.Any()) return;
+            dataGridViewRenew.Rows.Clear();
+            foreach (var item in data)
+            {
+                dataGridViewRenew.Rows.Add(item.Id, item.Name, item.AppliesTo, item.ExpiryDate.ToShortDateString(), item.Remarks);
+                textRenewName.AutoCompleteCustomSource.Add(item.Name);
+            }
+
+            _selectedRenew = data.FirstOrDefault()?.Id ?? Guid.Empty;
+            LoadAlert(data);
+        }
+
+
+        private void LoadAlert(List<RenewableModel> alertList)
+        {
+            if (alertList == null || !alertList.Any()) return;
 
             var ccDays = ConfigurationManager.AppSettings["ConcernDays"];
             int cdays = 0;
             int.TryParse(ccDays, out cdays);
-            if (cdays < 1) cdays = 5;
+            if (cdays < 1) cdays = 30;
 
             var checkDay = DateTime.Today.AddDays(cdays);
 
-            foreach (var item in carList)
+            dataGridViewAlert.Rows.Clear();
+            foreach (var item in alertList)
             {
-                _cars.InitAdd(item);
-                dataGridViewMain.Rows.Add(item.Id, item.Proprietar, item.Marca, item.Tip, item.NumarSasiu);
-                if (item.ITP.Date <= checkDay)
-                {
-                    MessageBox.Show(
-                        $"ITP expira in {cdays} zile pentru autovechicolul cu nr matricol {item.NrdeImatriculare}!",
-                        "Expirare");
-                    dataGridViewProblem.Rows.Add(item.NrdeImatriculare, $"ITP {item.ITP}");
-                }
-
-                if (item.RCA.Date <= checkDay)
-                {
-                    MessageBox.Show(
-                        $"RCA expira in {cdays} zile pentru autovechicolul cu nr matricol {item.NrdeImatriculare}!",
-                        "Expirare");
-                    dataGridViewProblem.Rows.Add(item.NrdeImatriculare, $"RCA {item.RCA}");
-                }
-
-                if (item.AsigPers.Date <= checkDay)
-                {
-                    MessageBox.Show(
-                        $"Asigurarea personala expira in {cdays} zile pentru autovechicolul cu nr matricol {item.NrdeImatriculare}!",
-                        "Expirare");
-                    dataGridViewProblem.Rows.Add(item.NrdeImatriculare, $"Asig. pers. {item.AsigPers}");
-                }
+                if (item.ExpiryDate <= checkDay)
+                    dataGridViewAlert.Rows.Add(item.ExpiryDate, item.Name, item.AppliesTo, item.Remarks);
             }
+        }
 
-            LoadCarData(carList.FirstOrDefault().Id);
+        private void dataGridViewRenew_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewRenew.SelectedRows.Count > 0)
+            {
 
+                string idstring = dataGridViewRenew.SelectedRows[0].Cells["RenewId"].Value.ToString();
+                _selectedRenew = Guid.Parse(idstring);
+                LoadRenew(_selectedRenew);
+            }
+        }
+
+        private void btnRenewSave_Click(object sender, EventArgs e)
+        {
+
+            SaveRenew();
+            dataGridViewRenew.AllowUserToAddRows = false;
+            ClearRenewables();
 
         }
 
-        private void LoadData(List<CarModel> dataList = null)
+        private void btnRenewDelete_Click(object sender, EventArgs e)
         {
-            dataGridViewMain.Rows.Clear();
-            dataGridViewProblem.Rows.Clear();
+            dataGridViewRenew.ClearSelection();
+            ClearRenewables();
+            dataGridViewRenew.Rows.Clear();
+            dataGridViewRenew.AllowUserToAddRows = true;
+            dataGridViewRenew.AllowUserToDeleteRows = true;
+            dataGridViewAlert.ClearSelection();
+            dataGridViewAlert.Rows.Clear();
+            dataGridViewAlert.AllowUserToAddRows = true;
+            dataGridViewAlert.AllowUserToDeleteRows = true;
 
-            if (_carsRepositoryHelper == null) _carsRepositoryHelper = new CarsRepositoryHelper();
-            List<CarModel> carList = dataList;
-
-            if (dataList == null) carList = _cars.GetList();
-            var ccDays = ConfigurationManager.AppSettings["ConcernDays"];
-            int cdays = 0;
-            int.TryParse(ccDays, out cdays);
-            if (cdays < 1) cdays = 5;
-
-            var checkDay = DateTime.Today.AddDays(cdays);
-
-            foreach (var item in carList)
+            _renewables.Remove(_selectedRenew);
+            LoadRenewablesDataGrid(_renewables.GetList());
+            dataGridViewRenew.AllowUserToDeleteRows = false;
+            dataGridViewAlert.AllowUserToDeleteRows = false;
+            if (_renewables.GetList().Count > 0) 
             {
-                dataGridViewMain.Rows.Add(item.Id, item.Proprietar, item.Marca, item.Tip, item.NumarSasiu);
-                if (item.ITP.Date <= checkDay) dataGridViewProblem.Rows.Add(item.NrdeImatriculare, $"ITP {item.ITP}");
-                if (item.RCA.Date <= checkDay) dataGridViewProblem.Rows.Add(item.NrdeImatriculare, $"RCA {item.RCA}");
-                if (item.AsigPers.Date <= checkDay) dataGridViewProblem.Rows.Add(item.NrdeImatriculare, $"Asig. pers. {item.AsigPers}");
+                dataGridViewRenew.AllowUserToAddRows = false;
+                dataGridViewAlert.AllowUserToAddRows = false;
             }
+        }
 
-            LoadCarData(_selectedId);
+        private void btnRenewNew_Click(object sender, EventArgs e)
+        {
+            ClearRenewables();
+        }
 
+        private void ClearRenewables()
+        {
+            _selectedRenew = Guid.Empty;
+            dataGridViewRenew.ClearSelection();
+            textRenewName.Text = string.Empty;
+            textRenewAppliesTo.Text = string.Empty;
+            dateTimePickerExp.Value = DateTime.Now;
+            richTextBoxRemarks.Text = string.Empty;
+        }
+
+        private void btnNewCar_Click(object sender, EventArgs e)
+        {
+            ClearCar();
+        }
+
+        private void ClearCar()
+        {
+            _selectedCar = Guid.Empty;
+            dataGridViewCar.ClearSelection();
+            textCarLp.Text = string.Empty;
+            textCarMM.Text = string.Empty;
+            textCarYear.Text = string.Empty;
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+
+        private void btnSaveCar_Click(object sender, EventArgs e)
         {
+            SaveCar();
+            dataGridViewCar.AllowUserToAddRows = false;
+            ClearCar();
+        }
 
-            List<CarModel> _resultList = new List<CarModel>();
+        private void btnDeleteCar_Click(object sender, EventArgs e)
+        {
+            dataGridViewCar.ClearSelection();
+            ClearCar();
+            dataGridViewCar.Rows.Clear();
+            dataGridViewCar.AllowUserToAddRows = true;
+            dataGridViewCar.AllowUserToDeleteRows = true;
 
-            if (radioButtonProp.Checked)
-                _resultList = _cars.GetList().Where(w => w.Proprietar.Trim().ToLower().StartsWith(textBox1.Text.Trim().ToLower())).ToList();
-            else if (radioButtonInMat.Checked)
-                _resultList = _cars.GetList().Where(w => w.NrdeImatriculare.Trim().ToLower().StartsWith(textBox1.Text.Trim().ToLower())).ToList();
-            else if (radioButtonMarca.Checked)
-                _resultList = _cars.GetList().Where(w => w.Marca.Trim().ToLower().StartsWith(textBox1.Text.Trim().ToLower())).ToList();
-            else if (radioButtonSasiu.Checked)
-                _resultList = _cars.GetList().Where(w => w.NumarSasiu.Trim().ToLower().StartsWith(textBox1.Text.Trim().ToLower())).ToList();
-            else
-                _resultList = _cars.GetList();
+            var car = _cars.GetList().FirstOrDefault(w => w.Id.Equals(_selectedCar));
+            var list = _renewables.GetList().Where(w => w.AppliesTo.Trim().Equals(car.LicencePlate.Trim()));
+            if (car == null || !list.Any())
+            {
+                dataGridViewCar.AllowUserToDeleteRows = false;
+                if (_cars.GetList().Count > 0) dataGridViewCar.AllowUserToAddRows = false;
+            }
 
-            LoadData(_resultList);
+            List<Guid> removables = new List<Guid>();
+            foreach (var item in list)
+            {
+                removables.Add(item.Id);
+            }
+
+            foreach (var ritem in removables)
+            {
+                _renewables.Remove(ritem);
+            }
+
+            LoadRenewablesDataGrid(_renewables.GetList());
+
+            _cars.Remove(_selectedCar);
+            LoadCarDataGrid(_cars.GetList());
+            dataGridViewCar.AllowUserToDeleteRows = false;
+            if (_cars.GetList().Count > 0) dataGridViewCar.AllowUserToAddRows = false;
+        }
+
+        private void dataGridViewCar_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewCar.SelectedRows.Count > 0)
+            {
+
+                string idstring = dataGridViewCar.SelectedRows[0].Cells["CarId"].Value.ToString();
+                _selectedCar = Guid.Parse(idstring);
+                LoadCar(_selectedCar);
+            }
+        }
+
+        private void dataGridViewPerson_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewPerson.SelectedRows.Count > 0)
+            {
+
+                string idstring = dataGridViewPerson.SelectedRows[0].Cells["PersonId"].Value.ToString();
+                _selectedPerson = Guid.Parse(idstring);
+                LoadPerson(_selectedPerson);
+            }
+        }
+
+        private void btnNewPerson_Click(object sender, EventArgs e)
+        {
+            ClearPerson();
+        }
+
+        private void ClearPerson()
+        {
+            _selectedPerson = Guid.Empty;
+            dataGridViewPerson.ClearSelection();
+            textPersonName.Text = string.Empty;
+            textPersonEmail.Text = string.Empty;
+            textPersonPhone.Text = string.Empty;
+        }
+
+        private void btnSavePerson_Click(object sender, EventArgs e)
+        {
+            SavePerson();
+            dataGridViewPerson.AllowUserToAddRows = false;
+            ClearPerson();
+        }
+
+        private void btnDeletePerson_Click(object sender, EventArgs e)
+        {
+            dataGridViewPerson.ClearSelection();
+            ClearPerson();
+            dataGridViewPerson.Rows.Clear();
+            dataGridViewPerson.AllowUserToAddRows = true;
+            dataGridViewPerson.AllowUserToDeleteRows = true;
+
+            var person = _persons.GetList().FirstOrDefault(w => w.Id.Equals(_selectedPerson));
+            var list = _renewables.GetList().Where(w => w.AppliesTo.Trim().Equals(person.FullName.Trim()));
+            if (person == null || !list.Any())
+            {
+                dataGridViewPerson.AllowUserToDeleteRows = false;
+                if (_persons.GetList().Count > 0) dataGridViewPerson.AllowUserToAddRows = false;
+            }
+
+            List<Guid> removables = new List<Guid>();
+            foreach (var item in list)
+            {
+                removables.Add(item.Id);
+            }
+
+            foreach (var ritem in removables)
+            {
+                _renewables.Remove(ritem);
+            }
+
+            LoadRenewablesDataGrid(_renewables.GetList());
+
+            _persons.Remove(_selectedPerson);
+            LoadPersonDataGrid(_persons.GetList());
+            dataGridViewPerson.AllowUserToDeleteRows = false;
+            if (_persons.GetList().Count > 0) dataGridViewPerson.AllowUserToAddRows = false;
         }
     }
 }

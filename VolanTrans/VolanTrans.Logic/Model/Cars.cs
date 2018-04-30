@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using VolanTrans.Logic.Helpers;
@@ -7,7 +8,7 @@ namespace VolanTrans.Logic.Model
 {
     public class Cars : List<CarModel>
     {
-        private List<CarModel> _cars;
+        private readonly List<CarModel> _cars;
         private readonly ICarsRepositoryHelper _carsRepositoryHelper;
 
         public Cars()
@@ -17,7 +18,7 @@ namespace VolanTrans.Logic.Model
 
         }
 
-        public bool Add(CarModel model)
+        public new bool Add(CarModel model)
         {
             bool result = true;
             try
@@ -42,7 +43,7 @@ namespace VolanTrans.Logic.Model
             }
         }
 
-        public bool Remove(CarModel model)
+        public new bool Remove(CarModel model)
         {
             try
             {
@@ -61,7 +62,7 @@ namespace VolanTrans.Logic.Model
 
         }
 
-        public bool Remove(int id)
+        public bool Remove(Guid id)
         {
             try
             {
