@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnNewPerson = new System.Windows.Forms.Button();
             this.btnDeletePerson = new System.Windows.Forms.Button();
             this.btnSavePerson = new System.Windows.Forms.Button();
             this.textPersonPhone = new System.Windows.Forms.TextBox();
@@ -47,6 +47,7 @@
             this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnNewCar = new System.Windows.Forms.Button();
             this.btnDeleteCar = new System.Windows.Forms.Button();
             this.btnSaveCar = new System.Windows.Forms.Button();
             this.textCarYear = new System.Windows.Forms.TextBox();
@@ -56,8 +57,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridViewCar = new System.Windows.Forms.DataGridView();
+            this.CarId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LicensePlate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MakeAndModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Year = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnRenewNew = new System.Windows.Forms.Button();
             this.dateTimePickerExp = new System.Windows.Forms.DateTimePicker();
             this.richTextBoxRemarks = new System.Windows.Forms.RichTextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -71,22 +77,15 @@
             this.dataGridViewRenew = new System.Windows.Forms.DataGridView();
             this.panel6 = new System.Windows.Forms.Panel();
             this.dataGridViewAlert = new System.Windows.Forms.DataGridView();
-            this.btnRenewNew = new System.Windows.Forms.Button();
-            this.btnNewCar = new System.Windows.Forms.Button();
-            this.btnNewPerson = new System.Windows.Forms.Button();
-            this.CarId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LicensePlate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MakeAndModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Year = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.When = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mijarle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kiemie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RenewId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AppliesTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ExpiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remaks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.When = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mijarle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kiemie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPerson)).BeginInit();
             this.panel3.SuspendLayout();
@@ -114,6 +113,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1008, 129);
             this.panel1.TabIndex = 0;
+            // 
+            // btnNewPerson
+            // 
+            this.btnNewPerson.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnNewPerson.Location = new System.Drawing.Point(638, 94);
+            this.btnNewPerson.Name = "btnNewPerson";
+            this.btnNewPerson.Size = new System.Drawing.Size(110, 33);
+            this.btnNewPerson.TabIndex = 21;
+            this.btnNewPerson.Text = "Clear";
+            this.btnNewPerson.UseVisualStyleBackColor = false;
+            this.btnNewPerson.Click += new System.EventHandler(this.btnNewPerson_Click);
             // 
             // btnDeletePerson
             // 
@@ -262,6 +272,17 @@
             this.panel3.Size = new System.Drawing.Size(1008, 130);
             this.panel3.TabIndex = 3;
             // 
+            // btnNewCar
+            // 
+            this.btnNewCar.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnNewCar.Location = new System.Drawing.Point(638, 96);
+            this.btnNewCar.Name = "btnNewCar";
+            this.btnNewCar.Size = new System.Drawing.Size(110, 33);
+            this.btnNewCar.TabIndex = 21;
+            this.btnNewCar.Text = "Clear";
+            this.btnNewCar.UseVisualStyleBackColor = false;
+            this.btnNewCar.Click += new System.EventHandler(this.btnNewCar_Click);
+            // 
             // btnDeleteCar
             // 
             this.btnDeleteCar.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -328,9 +349,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(618, 14);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(108, 20);
+            this.label6.Size = new System.Drawing.Size(69, 20);
             this.label6.TabIndex = 1;
-            this.label6.Text = "License Plate:";
+            this.label6.Text = "Reg. nr.:";
             // 
             // dataGridViewCar
             // 
@@ -352,6 +373,34 @@
             this.dataGridViewCar.Size = new System.Drawing.Size(612, 118);
             this.dataGridViewCar.TabIndex = 0;
             this.dataGridViewCar.SelectionChanged += new System.EventHandler(this.dataGridViewCar_SelectionChanged);
+            // 
+            // CarId
+            // 
+            this.CarId.HeaderText = "CarId";
+            this.CarId.Name = "CarId";
+            this.CarId.ReadOnly = true;
+            this.CarId.Visible = false;
+            // 
+            // LicensePlate
+            // 
+            this.LicensePlate.HeaderText = "Reg. nr.";
+            this.LicensePlate.Name = "LicensePlate";
+            this.LicensePlate.ReadOnly = true;
+            this.LicensePlate.Width = 160;
+            // 
+            // MakeAndModel
+            // 
+            this.MakeAndModel.HeaderText = "Make and model";
+            this.MakeAndModel.Name = "MakeAndModel";
+            this.MakeAndModel.ReadOnly = true;
+            this.MakeAndModel.Width = 300;
+            // 
+            // Year
+            // 
+            this.Year.HeaderText = "Year";
+            this.Year.Name = "Year";
+            this.Year.ReadOnly = true;
+            this.Year.Width = 150;
             // 
             // panel4
             // 
@@ -382,6 +431,17 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1008, 181);
             this.panel5.TabIndex = 5;
+            // 
+            // btnRenewNew
+            // 
+            this.btnRenewNew.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnRenewNew.Location = new System.Drawing.Point(638, 144);
+            this.btnRenewNew.Name = "btnRenewNew";
+            this.btnRenewNew.Size = new System.Drawing.Size(110, 33);
+            this.btnRenewNew.TabIndex = 20;
+            this.btnRenewNew.Text = "Clear";
+            this.btnRenewNew.UseVisualStyleBackColor = false;
+            this.btnRenewNew.Click += new System.EventHandler(this.btnRenewNew_Click);
             // 
             // dateTimePickerExp
             // 
@@ -461,9 +521,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(618, 68);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(93, 20);
+            this.label8.Size = new System.Drawing.Size(91, 20);
             this.label8.TabIndex = 10;
-            this.label8.Text = "Expire date:";
+            this.label8.Text = "Expiry date:";
             // 
             // label9
             // 
@@ -521,110 +581,11 @@
             this.dataGridViewAlert.MultiSelect = false;
             this.dataGridViewAlert.Name = "dataGridViewAlert";
             this.dataGridViewAlert.ReadOnly = true;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewAlert.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridViewAlert.RowHeadersVisible = false;
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Red;
-            this.dataGridViewAlert.RowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
+            this.dataGridViewAlert.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewAlert.Size = new System.Drawing.Size(1008, 272);
             this.dataGridViewAlert.TabIndex = 7;
-            // 
-            // btnRenewNew
-            // 
-            this.btnRenewNew.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnRenewNew.Location = new System.Drawing.Point(638, 144);
-            this.btnRenewNew.Name = "btnRenewNew";
-            this.btnRenewNew.Size = new System.Drawing.Size(110, 33);
-            this.btnRenewNew.TabIndex = 20;
-            this.btnRenewNew.Text = "New";
-            this.btnRenewNew.UseVisualStyleBackColor = false;
-            this.btnRenewNew.Click += new System.EventHandler(this.btnRenewNew_Click);
-            // 
-            // btnNewCar
-            // 
-            this.btnNewCar.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnNewCar.Location = new System.Drawing.Point(638, 96);
-            this.btnNewCar.Name = "btnNewCar";
-            this.btnNewCar.Size = new System.Drawing.Size(110, 33);
-            this.btnNewCar.TabIndex = 21;
-            this.btnNewCar.Text = "New";
-            this.btnNewCar.UseVisualStyleBackColor = false;
-            this.btnNewCar.Click += new System.EventHandler(this.btnNewCar_Click);
-            // 
-            // btnNewPerson
-            // 
-            this.btnNewPerson.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnNewPerson.Location = new System.Drawing.Point(638, 94);
-            this.btnNewPerson.Name = "btnNewPerson";
-            this.btnNewPerson.Size = new System.Drawing.Size(110, 33);
-            this.btnNewPerson.TabIndex = 21;
-            this.btnNewPerson.Text = "New";
-            this.btnNewPerson.UseVisualStyleBackColor = false;
-            this.btnNewPerson.Click += new System.EventHandler(this.btnNewPerson_Click);
-            // 
-            // CarId
-            // 
-            this.CarId.HeaderText = "CarId";
-            this.CarId.Name = "CarId";
-            this.CarId.ReadOnly = true;
-            this.CarId.Visible = false;
-            // 
-            // LicensePlate
-            // 
-            this.LicensePlate.HeaderText = "Reg. nr.";
-            this.LicensePlate.Name = "LicensePlate";
-            this.LicensePlate.ReadOnly = true;
-            this.LicensePlate.Width = 160;
-            // 
-            // MakeAndModel
-            // 
-            this.MakeAndModel.HeaderText = "Make and model";
-            this.MakeAndModel.Name = "MakeAndModel";
-            this.MakeAndModel.ReadOnly = true;
-            this.MakeAndModel.Width = 300;
-            // 
-            // Year
-            // 
-            this.Year.HeaderText = "Year";
-            this.Year.Name = "Year";
-            this.Year.ReadOnly = true;
-            this.Year.Width = 150;
-            // 
-            // When
-            // 
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.When.DefaultCellStyle = dataGridViewCellStyle13;
-            this.When.HeaderText = "When";
-            this.When.Name = "When";
-            this.When.ReadOnly = true;
-            this.When.Width = 150;
-            // 
-            // Mijarle
-            // 
-            this.Mijarle.HeaderText = "What is going to expire";
-            this.Mijarle.Name = "Mijarle";
-            this.Mijarle.ReadOnly = true;
-            this.Mijarle.Width = 270;
-            // 
-            // Kiemie
-            // 
-            this.Kiemie.HeaderText = "Who /what is the owner";
-            this.Kiemie.Name = "Kiemie";
-            this.Kiemie.ReadOnly = true;
-            this.Kiemie.Width = 250;
-            // 
-            // Remarks
-            // 
-            this.Remarks.HeaderText = "Remarks";
-            this.Remarks.Name = "Remarks";
-            this.Remarks.ReadOnly = true;
-            this.Remarks.Width = 340;
             // 
             // RenewId
             // 
@@ -659,10 +620,40 @@
             // Remaks
             // 
             this.Remaks.FillWeight = 158.3333F;
-            this.Remaks.HeaderText = "Remaks";
+            this.Remaks.HeaderText = "Remarks";
             this.Remaks.Name = "Remaks";
             this.Remaks.ReadOnly = true;
             this.Remaks.Width = 210;
+            // 
+            // When
+            // 
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.When.DefaultCellStyle = dataGridViewCellStyle1;
+            this.When.HeaderText = "When ?";
+            this.When.Name = "When";
+            this.When.ReadOnly = true;
+            this.When.Width = 150;
+            // 
+            // Mijarle
+            // 
+            this.Mijarle.HeaderText = "What is going to expire ?";
+            this.Mijarle.Name = "Mijarle";
+            this.Mijarle.ReadOnly = true;
+            this.Mijarle.Width = 270;
+            // 
+            // Kiemie
+            // 
+            this.Kiemie.HeaderText = "Who /what is the owner ?";
+            this.Kiemie.Name = "Kiemie";
+            this.Kiemie.ReadOnly = true;
+            this.Kiemie.Width = 250;
+            // 
+            // Remarks
+            // 
+            this.Remarks.HeaderText = "Remarks";
+            this.Remarks.Name = "Remarks";
+            this.Remarks.ReadOnly = true;
+            this.Remarks.Width = 340;
             // 
             // MainForm
             // 
@@ -752,15 +743,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LicensePlate;
         private System.Windows.Forms.DataGridViewTextBoxColumn MakeAndModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Year;
-        private System.Windows.Forms.DataGridViewTextBoxColumn When;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mijarle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Kiemie;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
         private System.Windows.Forms.DataGridViewTextBoxColumn RenewId;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameType;
         private System.Windows.Forms.DataGridViewTextBoxColumn AppliesTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ExpiryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Remaks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn When;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Mijarle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Kiemie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
     }
 }
 
