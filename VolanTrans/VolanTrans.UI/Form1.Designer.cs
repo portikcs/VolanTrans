@@ -41,10 +41,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewPerson = new System.Windows.Forms.DataGridView();
-            this.PersonId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PersonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnNewCar = new System.Windows.Forms.Button();
@@ -57,10 +53,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridViewCar = new System.Windows.Forms.DataGridView();
-            this.CarId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LicensePlate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MakeAndModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Year = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnRenewNew = new System.Windows.Forms.Button();
@@ -77,15 +69,23 @@
             this.dataGridViewRenew = new System.Windows.Forms.DataGridView();
             this.panel6 = new System.Windows.Forms.Panel();
             this.dataGridViewAlert = new System.Windows.Forms.DataGridView();
+            this.PersonId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PersonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CarId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LicensePlate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MakeAndModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Year = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mijarle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.When = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kiemie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RenewId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AppliesTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ExpiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remaks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.When = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mijarle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kiemie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPerson)).BeginInit();
             this.panel3.SuspendLayout();
@@ -121,7 +121,7 @@
             this.btnNewPerson.Name = "btnNewPerson";
             this.btnNewPerson.Size = new System.Drawing.Size(110, 33);
             this.btnNewPerson.TabIndex = 21;
-            this.btnNewPerson.Text = "Clear";
+            this.btnNewPerson.Text = "Új";
             this.btnNewPerson.UseVisualStyleBackColor = false;
             this.btnNewPerson.Click += new System.EventHandler(this.btnNewPerson_Click);
             // 
@@ -132,7 +132,7 @@
             this.btnDeletePerson.Name = "btnDeletePerson";
             this.btnDeletePerson.Size = new System.Drawing.Size(110, 33);
             this.btnDeletePerson.TabIndex = 8;
-            this.btnDeletePerson.Text = "Delete";
+            this.btnDeletePerson.Text = "Törlés";
             this.btnDeletePerson.UseVisualStyleBackColor = false;
             this.btnDeletePerson.Click += new System.EventHandler(this.btnDeletePerson_Click);
             // 
@@ -143,7 +143,7 @@
             this.btnSavePerson.Name = "btnSavePerson";
             this.btnSavePerson.Size = new System.Drawing.Size(110, 33);
             this.btnSavePerson.TabIndex = 7;
-            this.btnSavePerson.Text = "Save";
+            this.btnSavePerson.Text = "Mentés";
             this.btnSavePerson.UseVisualStyleBackColor = false;
             this.btnSavePerson.Click += new System.EventHandler(this.btnSavePerson_Click);
             // 
@@ -182,18 +182,18 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(618, 71);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 20);
+            this.label2.Size = new System.Drawing.Size(66, 20);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Phone:";
+            this.label2.Text = "Telefon:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(618, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 20);
+            this.label1.Size = new System.Drawing.Size(40, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Name:";
+            this.label1.Text = "Név:";
             // 
             // dataGridViewPerson
             // 
@@ -215,34 +215,6 @@
             this.dataGridViewPerson.Size = new System.Drawing.Size(612, 130);
             this.dataGridViewPerson.TabIndex = 0;
             this.dataGridViewPerson.SelectionChanged += new System.EventHandler(this.dataGridViewPerson_SelectionChanged);
-            // 
-            // PersonId
-            // 
-            this.PersonId.HeaderText = "PersonId";
-            this.PersonId.Name = "PersonId";
-            this.PersonId.ReadOnly = true;
-            this.PersonId.Visible = false;
-            // 
-            // PersonName
-            // 
-            this.PersonName.HeaderText = "Name";
-            this.PersonName.Name = "PersonName";
-            this.PersonName.ReadOnly = true;
-            this.PersonName.Width = 220;
-            // 
-            // Email
-            // 
-            this.Email.HeaderText = "Email";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            this.Email.Width = 200;
-            // 
-            // Phone
-            // 
-            this.Phone.HeaderText = "Phone";
-            this.Phone.Name = "Phone";
-            this.Phone.ReadOnly = true;
-            this.Phone.Width = 190;
             // 
             // panel2
             // 
@@ -279,7 +251,7 @@
             this.btnNewCar.Name = "btnNewCar";
             this.btnNewCar.Size = new System.Drawing.Size(110, 33);
             this.btnNewCar.TabIndex = 21;
-            this.btnNewCar.Text = "Clear";
+            this.btnNewCar.Text = "Új";
             this.btnNewCar.UseVisualStyleBackColor = false;
             this.btnNewCar.Click += new System.EventHandler(this.btnNewCar_Click);
             // 
@@ -290,7 +262,7 @@
             this.btnDeleteCar.Name = "btnDeleteCar";
             this.btnDeleteCar.Size = new System.Drawing.Size(110, 33);
             this.btnDeleteCar.TabIndex = 8;
-            this.btnDeleteCar.Text = "Delete";
+            this.btnDeleteCar.Text = "Törlés";
             this.btnDeleteCar.UseVisualStyleBackColor = false;
             this.btnDeleteCar.Click += new System.EventHandler(this.btnDeleteCar_Click);
             // 
@@ -301,7 +273,7 @@
             this.btnSaveCar.Name = "btnSaveCar";
             this.btnSaveCar.Size = new System.Drawing.Size(110, 33);
             this.btnSaveCar.TabIndex = 7;
-            this.btnSaveCar.Text = "Save";
+            this.btnSaveCar.Text = "Mentés";
             this.btnSaveCar.UseVisualStyleBackColor = false;
             this.btnSaveCar.Click += new System.EventHandler(this.btnSaveCar_Click);
             // 
@@ -331,27 +303,27 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(618, 42);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(130, 20);
+            this.label4.Size = new System.Drawing.Size(116, 20);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Make and Model:";
+            this.label4.Text = "Márka és típus:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(618, 71);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 20);
+            this.label5.Size = new System.Drawing.Size(62, 20);
             this.label5.TabIndex = 2;
-            this.label5.Text = "Year:";
+            this.label5.Text = "Évjárat:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(618, 14);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 20);
+            this.label6.Size = new System.Drawing.Size(90, 20);
             this.label6.TabIndex = 1;
-            this.label6.Text = "Reg. nr.:";
+            this.label6.Text = "Rendszám:";
             // 
             // dataGridViewCar
             // 
@@ -373,34 +345,6 @@
             this.dataGridViewCar.Size = new System.Drawing.Size(612, 118);
             this.dataGridViewCar.TabIndex = 0;
             this.dataGridViewCar.SelectionChanged += new System.EventHandler(this.dataGridViewCar_SelectionChanged);
-            // 
-            // CarId
-            // 
-            this.CarId.HeaderText = "CarId";
-            this.CarId.Name = "CarId";
-            this.CarId.ReadOnly = true;
-            this.CarId.Visible = false;
-            // 
-            // LicensePlate
-            // 
-            this.LicensePlate.HeaderText = "Reg. nr.";
-            this.LicensePlate.Name = "LicensePlate";
-            this.LicensePlate.ReadOnly = true;
-            this.LicensePlate.Width = 160;
-            // 
-            // MakeAndModel
-            // 
-            this.MakeAndModel.HeaderText = "Make and model";
-            this.MakeAndModel.Name = "MakeAndModel";
-            this.MakeAndModel.ReadOnly = true;
-            this.MakeAndModel.Width = 300;
-            // 
-            // Year
-            // 
-            this.Year.HeaderText = "Year";
-            this.Year.Name = "Year";
-            this.Year.ReadOnly = true;
-            this.Year.Width = 150;
             // 
             // panel4
             // 
@@ -439,7 +383,7 @@
             this.btnRenewNew.Name = "btnRenewNew";
             this.btnRenewNew.Size = new System.Drawing.Size(110, 33);
             this.btnRenewNew.TabIndex = 20;
-            this.btnRenewNew.Text = "Clear";
+            this.btnRenewNew.Text = "Új";
             this.btnRenewNew.UseVisualStyleBackColor = false;
             this.btnRenewNew.Click += new System.EventHandler(this.btnRenewNew_Click);
             // 
@@ -463,9 +407,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(618, 97);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(77, 20);
+            this.label10.Size = new System.Drawing.Size(93, 20);
             this.label10.TabIndex = 17;
-            this.label10.Text = "Remarks:";
+            this.label10.Text = "Megjegyzés";
             // 
             // btnRenewDelete
             // 
@@ -474,7 +418,7 @@
             this.btnRenewDelete.Name = "btnRenewDelete";
             this.btnRenewDelete.Size = new System.Drawing.Size(110, 33);
             this.btnRenewDelete.TabIndex = 16;
-            this.btnRenewDelete.Text = "Delete";
+            this.btnRenewDelete.Text = "Törlés";
             this.btnRenewDelete.UseVisualStyleBackColor = false;
             this.btnRenewDelete.Click += new System.EventHandler(this.btnRenewDelete_Click);
             // 
@@ -485,7 +429,7 @@
             this.btnRenewSave.Name = "btnRenewSave";
             this.btnRenewSave.Size = new System.Drawing.Size(110, 33);
             this.btnRenewSave.TabIndex = 15;
-            this.btnRenewSave.Text = "Save";
+            this.btnRenewSave.Text = "Mentés";
             this.btnRenewSave.UseVisualStyleBackColor = false;
             this.btnRenewSave.Click += new System.EventHandler(this.btnRenewSave_Click);
             // 
@@ -512,9 +456,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(618, 39);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 20);
+            this.label7.Size = new System.Drawing.Size(73, 20);
             this.label7.TabIndex = 11;
-            this.label7.Text = "Applies to:";
+            this.label7.Text = "Kié, mié?";
             // 
             // label8
             // 
@@ -523,16 +467,16 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(91, 20);
             this.label8.TabIndex = 10;
-            this.label8.Text = "Expiry date:";
+            this.label8.Text = "Lejár ekkor:";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(618, 11);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(101, 20);
+            this.label9.Size = new System.Drawing.Size(84, 20);
             this.label9.TabIndex = 9;
-            this.label9.Text = "Name / Type:";
+            this.label9.Text = "Dok. típus:";
             // 
             // dataGridViewRenew
             // 
@@ -572,8 +516,8 @@
             this.dataGridViewAlert.AllowUserToOrderColumns = true;
             this.dataGridViewAlert.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAlert.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.When,
             this.Mijarle,
+            this.When,
             this.Kiemie,
             this.Remarks});
             this.dataGridViewAlert.Dock = System.Windows.Forms.DockStyle.Top;
@@ -587,73 +531,133 @@
             this.dataGridViewAlert.Size = new System.Drawing.Size(1008, 272);
             this.dataGridViewAlert.TabIndex = 7;
             // 
-            // RenewId
+            // PersonId
             // 
-            this.RenewId.HeaderText = "RenewId";
-            this.RenewId.Name = "RenewId";
-            this.RenewId.ReadOnly = true;
-            this.RenewId.Visible = false;
-            this.RenewId.Width = 110;
+            this.PersonId.HeaderText = "PersonId";
+            this.PersonId.Name = "PersonId";
+            this.PersonId.ReadOnly = true;
+            this.PersonId.Visible = false;
             // 
-            // NameType
+            // PersonName
             // 
-            this.NameType.HeaderText = "Name/Type";
-            this.NameType.Name = "NameType";
-            this.NameType.ReadOnly = true;
-            this.NameType.Width = 150;
+            this.PersonName.HeaderText = "Név";
+            this.PersonName.Name = "PersonName";
+            this.PersonName.ReadOnly = true;
+            this.PersonName.Width = 220;
             // 
-            // AppliesTo
+            // Email
             // 
-            this.AppliesTo.FillWeight = 41.66667F;
-            this.AppliesTo.HeaderText = "Applies To";
-            this.AppliesTo.Name = "AppliesTo";
-            this.AppliesTo.ReadOnly = true;
-            this.AppliesTo.Width = 150;
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            this.Email.Width = 200;
             // 
-            // ExpiryDate
+            // Phone
             // 
-            this.ExpiryDate.HeaderText = "Expiry date";
-            this.ExpiryDate.Name = "ExpiryDate";
-            this.ExpiryDate.ReadOnly = true;
-            this.ExpiryDate.Width = 110;
+            this.Phone.HeaderText = "Telefon";
+            this.Phone.Name = "Phone";
+            this.Phone.ReadOnly = true;
+            this.Phone.Width = 190;
             // 
-            // Remaks
+            // CarId
             // 
-            this.Remaks.FillWeight = 158.3333F;
-            this.Remaks.HeaderText = "Remarks";
-            this.Remaks.Name = "Remaks";
-            this.Remaks.ReadOnly = true;
-            this.Remaks.Width = 210;
+            this.CarId.HeaderText = "CarId";
+            this.CarId.Name = "CarId";
+            this.CarId.ReadOnly = true;
+            this.CarId.Visible = false;
+            // 
+            // LicensePlate
+            // 
+            this.LicensePlate.HeaderText = "Rendszám";
+            this.LicensePlate.Name = "LicensePlate";
+            this.LicensePlate.ReadOnly = true;
+            this.LicensePlate.Width = 160;
+            // 
+            // MakeAndModel
+            // 
+            this.MakeAndModel.HeaderText = "Márka és típus";
+            this.MakeAndModel.Name = "MakeAndModel";
+            this.MakeAndModel.ReadOnly = true;
+            this.MakeAndModel.ToolTipText = "Például: Opel Astra";
+            this.MakeAndModel.Width = 300;
+            // 
+            // Year
+            // 
+            this.Year.HeaderText = "Évjárat";
+            this.Year.Name = "Year";
+            this.Year.ReadOnly = true;
+            this.Year.Width = 150;
+            // 
+            // Mijarle
+            // 
+            this.Mijarle.HeaderText = "Mi fog lejárni?";
+            this.Mijarle.Name = "Mijarle";
+            this.Mijarle.ReadOnly = true;
+            this.Mijarle.Width = 270;
             // 
             // When
             // 
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.When.DefaultCellStyle = dataGridViewCellStyle1;
-            this.When.HeaderText = "When ?";
+            this.When.HeaderText = "Mikor?";
             this.When.Name = "When";
             this.When.ReadOnly = true;
             this.When.Width = 150;
             // 
-            // Mijarle
-            // 
-            this.Mijarle.HeaderText = "What is going to expire ?";
-            this.Mijarle.Name = "Mijarle";
-            this.Mijarle.ReadOnly = true;
-            this.Mijarle.Width = 270;
-            // 
             // Kiemie
             // 
-            this.Kiemie.HeaderText = "Who /what is the owner ?";
+            this.Kiemie.HeaderText = "Mihez vagy kihez tartozik?";
             this.Kiemie.Name = "Kiemie";
             this.Kiemie.ReadOnly = true;
             this.Kiemie.Width = 250;
             // 
             // Remarks
             // 
-            this.Remarks.HeaderText = "Remarks";
+            this.Remarks.HeaderText = "Megjegyzés";
             this.Remarks.Name = "Remarks";
             this.Remarks.ReadOnly = true;
             this.Remarks.Width = 340;
+            // 
+            // RenewId
+            // 
+            this.RenewId.HeaderText = "RenewId";
+            this.RenewId.Name = "RenewId";
+            this.RenewId.ReadOnly = true;
+            this.RenewId.ToolTipText = "Az érvényesség lejáratának utolsó napja";
+            this.RenewId.Visible = false;
+            this.RenewId.Width = 110;
+            // 
+            // NameType
+            // 
+            this.NameType.HeaderText = "Dokumentumtípus";
+            this.NameType.Name = "NameType";
+            this.NameType.ReadOnly = true;
+            this.NameType.ToolTipText = "Például: Cazier, ITP, RCA, Rovinieta, Aviz medical stb.";
+            this.NameType.Width = 150;
+            // 
+            // AppliesTo
+            // 
+            this.AppliesTo.FillWeight = 41.66667F;
+            this.AppliesTo.HeaderText = "Kié, mié?";
+            this.AppliesTo.Name = "AppliesTo";
+            this.AppliesTo.ReadOnly = true;
+            this.AppliesTo.ToolTipText = "Autó rendszáma vagy oktató kollega neve, a rögzített dokumentum típustól függően";
+            this.AppliesTo.Width = 150;
+            // 
+            // ExpiryDate
+            // 
+            this.ExpiryDate.HeaderText = "Lejár ekkor";
+            this.ExpiryDate.Name = "ExpiryDate";
+            this.ExpiryDate.ReadOnly = true;
+            this.ExpiryDate.Width = 120;
+            // 
+            // Remaks
+            // 
+            this.Remaks.FillWeight = 158.3333F;
+            this.Remaks.HeaderText = "Megjegyzés";
+            this.Remaks.Name = "Remaks";
+            this.Remaks.ReadOnly = true;
+            this.Remaks.Width = 200;
             // 
             // MainForm
             // 
@@ -729,16 +733,16 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridView dataGridViewRenew;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PersonId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PersonName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
         private System.Windows.Forms.DateTimePicker dateTimePickerExp;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.DataGridView dataGridViewAlert;
         private System.Windows.Forms.Button btnRenewNew;
         private System.Windows.Forms.Button btnNewPerson;
         private System.Windows.Forms.Button btnNewCar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PersonId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PersonName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn CarId;
         private System.Windows.Forms.DataGridViewTextBoxColumn LicensePlate;
         private System.Windows.Forms.DataGridViewTextBoxColumn MakeAndModel;
@@ -748,8 +752,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AppliesTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ExpiryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Remaks;
-        private System.Windows.Forms.DataGridViewTextBoxColumn When;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mijarle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn When;
         private System.Windows.Forms.DataGridViewTextBoxColumn Kiemie;
         private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
     }
