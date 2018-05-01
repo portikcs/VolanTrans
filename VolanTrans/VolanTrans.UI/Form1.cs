@@ -407,7 +407,7 @@ namespace VolanTrans.UI
                 List<Guid> removables = new List<Guid>();
                 foreach (var item in list)
                 {
-                    removables.Add(item.Id);
+                     removables.Add(item.Id);
                 }
 
                 foreach (var ritem in removables)
