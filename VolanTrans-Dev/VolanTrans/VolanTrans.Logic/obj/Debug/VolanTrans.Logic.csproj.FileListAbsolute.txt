@@ -1,0 +1,7 @@
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.Logic\bin\Debug\VolanTrans.Logic.dll
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.Logic\bin\Debug\VolanTrans.Logic.pdb
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.Logic\bin\Debug\Newtonsoft.Json.dll
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.Logic\bin\Debug\Newtonsoft.Json.xml
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.Logic\obj\Debug\VolanTrans.Logic.csprojResolveAssemblyReference.cache
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.Logic\obj\Debug\VolanTrans.Logic.dll
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.Logic\obj\Debug\VolanTrans.Logic.pdb

@@ -1,0 +1,13 @@
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\bin\Debug\VolanTrans.UI.exe.config
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\bin\Debug\VolanTrans.UI.exe
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\bin\Debug\VolanTrans.UI.pdb
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\bin\Debug\VolanTrans.Logic.dll
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\bin\Debug\Newtonsoft.Json.dll
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\bin\Debug\VolanTrans.Logic.pdb
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\bin\Debug\Newtonsoft.Json.xml
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\obj\Debug\VolanTrans.UI.csprojResolveAssemblyReference.cache
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\obj\Debug\VolanTrans.UI.MainForm.resources
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\obj\Debug\VolanTrans.UI.Properties.Resources.resources
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\obj\Debug\VolanTrans.UI.csproj.GenerateResource.Cache
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\obj\Debug\VolanTrans.UI.exe
+d:\test\VolanTrans-Dev\VolanTrans\VolanTrans.UI\obj\Debug\VolanTrans.UI.pdb
