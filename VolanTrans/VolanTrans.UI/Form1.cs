@@ -243,7 +243,6 @@ namespace VolanTrans.UI
         private void btnRenewDelete_Click(object sender, EventArgs e)
         {
             dataGridViewRenew.ClearSelection();
-            ClearRenewables();
             dataGridViewRenew.Rows.Clear();
             dataGridViewRenew.AllowUserToAddRows = true;
             dataGridViewRenew.AllowUserToDeleteRows = true;
@@ -256,11 +255,13 @@ namespace VolanTrans.UI
             LoadRenewablesDataGrid(_renewables.GetList());
             dataGridViewRenew.AllowUserToDeleteRows = false;
             dataGridViewAlert.AllowUserToDeleteRows = false;
-            if (_renewables.GetList().Count > 0) 
+            if (_renewables.GetList().Count > 0)
             {
                 dataGridViewRenew.AllowUserToAddRows = false;
                 dataGridViewAlert.AllowUserToAddRows = false;
             }
+
+            ClearRenewables();
         }
 
         private void btnRenewNew_Click(object sender, EventArgs e)
@@ -304,36 +305,41 @@ namespace VolanTrans.UI
         private void btnDeleteCar_Click(object sender, EventArgs e)
         {
             dataGridViewCar.ClearSelection();
-            ClearCar();
             dataGridViewCar.Rows.Clear();
             dataGridViewCar.AllowUserToAddRows = true;
             dataGridViewCar.AllowUserToDeleteRows = true;
 
             var car = _cars.GetList().FirstOrDefault(w => w.Id.Equals(_selectedCar));
             var list = _renewables.GetList().Where(w => w.AppliesTo.Trim().Equals(car.LicencePlate.Trim()));
-            if (car == null || !list.Any())
+            if (car == null)
             {
                 dataGridViewCar.AllowUserToDeleteRows = false;
                 if (_cars.GetList().Count > 0) dataGridViewCar.AllowUserToAddRows = false;
+                return;
             }
 
-            List<Guid> removables = new List<Guid>();
-            foreach (var item in list)
+            if (list != null && list.Any())
             {
-                removables.Add(item.Id);
-            }
 
-            foreach (var ritem in removables)
-            {
-                _renewables.Remove(ritem);
-            }
+                List<Guid> removables = new List<Guid>();
+                foreach (var item in list)
+                {
+                    removables.Add(item.Id);
+                }
 
-            LoadRenewablesDataGrid(_renewables.GetList());
+                foreach (var ritem in removables)
+                {
+                    _renewables.Remove(ritem);
+                }
+
+                LoadRenewablesDataGrid(_renewables.GetList());
+            }
 
             _cars.Remove(_selectedCar);
             LoadCarDataGrid(_cars.GetList());
             dataGridViewCar.AllowUserToDeleteRows = false;
             if (_cars.GetList().Count > 0) dataGridViewCar.AllowUserToAddRows = false;
+            ClearCar();
         }
 
         private void dataGridViewCar_SelectionChanged(object sender, EventArgs e)
@@ -382,36 +388,40 @@ namespace VolanTrans.UI
         private void btnDeletePerson_Click(object sender, EventArgs e)
         {
             dataGridViewPerson.ClearSelection();
-            ClearPerson();
             dataGridViewPerson.Rows.Clear();
             dataGridViewPerson.AllowUserToAddRows = true;
             dataGridViewPerson.AllowUserToDeleteRows = true;
 
             var person = _persons.GetList().FirstOrDefault(w => w.Id.Equals(_selectedPerson));
             var list = _renewables.GetList().Where(w => w.AppliesTo.Trim().Equals(person.FullName.Trim()));
-            if (person == null || !list.Any())
+            if (person == null)
             {
                 dataGridViewPerson.AllowUserToDeleteRows = false;
                 if (_persons.GetList().Count > 0) dataGridViewPerson.AllowUserToAddRows = false;
+                return;
             }
 
-            List<Guid> removables = new List<Guid>();
-            foreach (var item in list)
+            if (list != null && list.Any())
             {
-                removables.Add(item.Id);
+
+                List<Guid> removables = new List<Guid>();
+                foreach (var item in list)
+                {
+                    removables.Add(item.Id);
+                }
+
+                foreach (var ritem in removables)
+                {
+                    _renewables.Remove(ritem);
+                }
+
+                LoadRenewablesDataGrid(_renewables.GetList());
             }
-
-            foreach (var ritem in removables)
-            {
-                _renewables.Remove(ritem);
-            }
-
-            LoadRenewablesDataGrid(_renewables.GetList());
-
             _persons.Remove(_selectedPerson);
             LoadPersonDataGrid(_persons.GetList());
             dataGridViewPerson.AllowUserToDeleteRows = false;
             if (_persons.GetList().Count > 0) dataGridViewPerson.AllowUserToAddRows = false;
+            ClearPerson();
         }
     }
 }
