@@ -94,7 +94,7 @@ namespace VolanTrans.UI
 
             if (string.IsNullOrWhiteSpace(person.FullName))
             {
-                MessageBox.Show("Name is empty!", "Error");
+                MessageBox.Show("Kérem, töltse ki a 'Név' mezőt!", "Error");
                 return;
             }
             _persons.Add(person);
@@ -122,7 +122,7 @@ namespace VolanTrans.UI
 
             if (string.IsNullOrWhiteSpace(car.LicencePlate))
             {
-                MessageBox.Show("Licence Plate is empty!", "Error");
+                MessageBox.Show("Kérem, töltse ki a 'Rendszám' mezőt!", "Error");
                 return;
             }
             _cars.Add(car);
@@ -179,7 +179,7 @@ namespace VolanTrans.UI
             if (string.IsNullOrWhiteSpace(renew.Name) || string.IsNullOrWhiteSpace(renew.AppliesTo) ||
                !textRenewAppliesTo.AutoCompleteCustomSource.Contains(renew.AppliesTo.Trim()))
             {
-                MessageBox.Show("Something is wrong!", "Error");
+                MessageBox.Show("A megadott név vagy rendszám még nem szerepel a rendszerben, kérem, próbálja újra a hiányzó adatok pótlása után!", "Error");
                 return;
             }
             _renewables.Add(renew);
@@ -410,7 +410,7 @@ namespace VolanTrans.UI
                 List<Guid> removables = new List<Guid>();
                 foreach (var item in list)
                 {
-                    removables.Add(item.Id);
+                     removables.Add(item.Id);
                 }
 
                 foreach (var ritem in removables)
