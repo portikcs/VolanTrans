@@ -225,7 +225,8 @@ namespace VolanTrans.UI
             if (dataGridViewRenew.SelectedRows.Count > 0)
             {
 
-                string idstring = dataGridViewRenew.SelectedRows[0].Cells["RenewId"].Value.ToString();
+                string idstring = dataGridViewRenew.SelectedRows[0].Cells["RenewId"].Value?.ToString();
+                if(string.IsNullOrWhiteSpace(idstring)) return;
                 _selectedRenew = Guid.Parse(idstring);
                 LoadRenew(_selectedRenew);
             }
@@ -347,7 +348,8 @@ namespace VolanTrans.UI
             if (dataGridViewCar.SelectedRows.Count > 0)
             {
 
-                string idstring = dataGridViewCar.SelectedRows[0].Cells["CarId"].Value.ToString();
+                string idstring = dataGridViewCar.SelectedRows[0].Cells["CarId"].Value?.ToString();
+                if (string.IsNullOrWhiteSpace(idstring)) return;
                 _selectedCar = Guid.Parse(idstring);
                 LoadCar(_selectedCar);
             }
@@ -358,7 +360,8 @@ namespace VolanTrans.UI
             if (dataGridViewPerson.SelectedRows.Count > 0)
             {
 
-                string idstring = dataGridViewPerson.SelectedRows[0].Cells["PersonId"].Value.ToString();
+                string idstring = dataGridViewPerson.SelectedRows[0].Cells["PersonId"].Value?.ToString();
+                if (string.IsNullOrWhiteSpace(idstring)) return;
                 _selectedPerson = Guid.Parse(idstring);
                 LoadPerson(_selectedPerson);
             }
